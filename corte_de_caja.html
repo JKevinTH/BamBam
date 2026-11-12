@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corte de caja</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/corte_caja.css">
+    <link rel="stylesheet" href="components/header.css">
+</head>
+<body>
+
+    <header>
+
+        <mi-header></mi-header>
+
+    </header>
+
+    <main class="contenido">
+
+        <section class="inicio">
+            <div class="inicio_texto">
+                <h1>Corte de caja</h1>
+                <p class="inicio_subtitulo">Cuenta el efectivo; las ventas, el esperado y la diferencia se calculan solos.</p>
+            </div>
+            <div class="inicio_usuario">
+                <p>Usuario</p>
+            </div>
+        </section>
+
+        <nav class="pestanas" aria-label="Secciones del corte">
+            <button class="pestana pestana--activa" data-panel="nuevo">Nuevo corte</button>
+            <button class="pestana" data-panel="historial">Historial de cortes</button>
+        </nav>
+
+        <!-- ================= NUEVO CORTE ================= -->
+        <section class="panel" id="panel-nuevo">
+
+            <div class="datos-corte">
+                <div class="campo"><label for="c-fecha">Fecha</label><input type="date" id="c-fecha"></div>
+                <div class="campo"><label for="c-desde">Hora de inicio</label><input type="time" id="c-desde"></div>
+                <div class="campo"><label for="c-hasta">Hora de cierre</label><input type="time" id="c-hasta"></div>
+                <button class="boton" id="actualizar">Actualizar ventas</button>
+            </div>
+
+            <div class="kpis">
+                <div class="kpi"><div class="kpi__titulo">Ventas en efectivo</div><div class="kpi__valor" id="v-efectivo">$0.00</div></div>
+                <div class="kpi"><div class="kpi__titulo">Ventas con tarjeta</div><div class="kpi__valor" id="v-tarjeta">$0.00</div></div>
+                <div class="kpi"><div class="kpi__titulo">Ventas por transferencia</div><div class="kpi__valor" id="v-transferencia">$0.00</div></div>
+                <div class="kpi kpi--oscuro"><div class="kpi__titulo">Total de ventas</div><div class="kpi__valor" id="v-total">$0.00</div></div>
+            </div>
+
+            <div class="corte">
+
+                <div class="tabla-contenedor">
+                    <table class="tabla">
+                        <thead>
+                            <tr>
+                                <th>Moneda / Billete</th>
+                                <th class="numero">Cant. inicial</th>
+                                <th class="numero">Dinero inicial</th>
+                                <th class="numero">Cant. contada</th>
+                                <th class="numero">Dinero contado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="denominaciones"></tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Total efectivo</td>
+                                <td class="numero" id="t-cant-ini">0</td>
+                                <td class="numero" id="t-din-ini">$0.00</td>
+                                <td class="numero" id="t-cant-fin">0</td>
+                                <td class="numero" id="t-din-fin">$0.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="lateral">
+
+                    <div class="cuadre">
+                        <h2>Cuadre de caja</h2>
+                        <dl>
+                            <div><dt>Efectivo inicial</dt><dd id="q-inicial">$0.00</dd></div>
+                            <div><dt>+ Ventas en efectivo</dt><dd id="q-ventas">$0.00</dd></div>
+                            <div><dt>+ Entradas de dinero</dt><dd id="q-entradas">$0.00</dd></div>
+                            <div><dt>− Salidas de dinero</dt><dd id="q-salidas">$0.00</dd></div>
+                            <div class="sub"><dt>Efectivo esperado</dt><dd id="q-esperado">$0.00</dd></div>
+                            <div><dt>Efectivo contado</dt><dd id="q-contado">$0.00</dd></div>
+                            <div class="sub"><dt>Diferencia</dt><dd id="q-diferencia">$0.00</dd></div>
+                        </dl>
+                        <div class="indicador indicador--neutro" id="indicador">Cuenta el efectivo</div>
+                        <button class="boton boton--principal" id="guardar">Guardar corte</button>
+                        <button class="boton" id="exportar">Exportar a PDF</button>
+                    </div>
+
+                    <div class="cuadre">
+                        <h2>Entradas y salidas de dinero</h2>
+                        <div class="acciones">
+                            <button class="boton boton--chico" id="mov-entrada">+ Entrada</button>
+                            <button class="boton boton--chico" id="mov-salida">− Salida</button>
+                        </div>
+                        <ul class="movimientos" id="movimientos"></ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HISTORIAL ================= -->
+        <section class="panel" id="panel-historial" hidden>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Horario</th>
+                            <th>Empleado</th>
+                            <th class="numero">Ventas</th>
+                            <th class="numero">Esperado</th>
+                            <th class="numero">Contado</th>
+                            <th class="numero">Diferencia</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="historial"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+    <footer></footer>
+    <script src="components/header.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/corte_caja.js"></script>
+</body>
+</html>

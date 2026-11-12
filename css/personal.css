@@ -1,0 +1,7 @@
+/* Pantalla de personal. Lo común está en app.css */
+.tabla .empleado {
+     font-weight: 600; 
+}
+.tabla .turno small {
+     display: block; color: var(--suave); font-size: 12px;
+}

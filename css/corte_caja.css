@@ -1,0 +1,31 @@
+/* Pantalla de corte de caja. Lo común está en app.css */
+
+.datos-corte { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 20px; }
+.datos-corte .campo { min-width: 160px; }
+
+.corte { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 22px; align-items: start; }
+.lateral { display: flex; flex-direction: column; gap: 18px; }
+
+.tabla .denominacion { font-weight: 600; }
+.tabla .cantidad-input { width: 84px; padding: 7px 10px; }
+
+.cuadre { background: var(--superficie); border: 1px solid var(--borde); border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.cuadre h2 { font-size: 17px; }
+.cuadre dl { display: flex; flex-direction: column; gap: 8px; }
+.cuadre dl div { display: flex; justify-content: space-between; font-size: 14px; }
+.cuadre dd { font-variant-numeric: tabular-nums; }
+.cuadre .sub { font-weight: 700; font-size: 16px; padding-top: 8px; border-top: 1px dashed var(--borde); }
+
+.indicador { text-align: center; padding: 14px; border-radius: 14px; font-weight: 700; font-size: 18px; }
+.indicador--neutro { background: var(--neutro-fondo); color: var(--suave); font-size: 14px; font-weight: 500; }
+.indicador--cuadrada { background: var(--ok-fondo); color: var(--ok-texto); }
+.indicador--sobrante { background: var(--aviso-fondo); color: var(--aviso-texto); }
+.indicador--faltante { background: var(--peligro-fondo); color: var(--peligro-texto); }
+
+.movimientos { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.movimientos li { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; padding: 8px 0; border-bottom: 1px solid var(--borde-suave); }
+.movimientos small { display: block; color: var(--suave); }
+.mov--entrada { color: var(--ok-texto); font-weight: 600; }
+.mov--salida { color: var(--peligro-texto); font-weight: 600; }
+
+@media (max-width: 1100px) { .corte { grid-template-columns: 1fr; } }

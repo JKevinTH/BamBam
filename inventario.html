@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/inventario.css">
+    <link rel="stylesheet" href="components/header.css">
+</head>
+<body>
+
+    <header>
+
+        <mi-header></mi-header>
+
+    </header>
+
+    <main class="contenido">
+
+        <section class="inicio">
+            <div class="inicio_texto">
+                <h1>Inventario</h1>
+                <p class="inicio_subtitulo">Ingredientes, movimientos, recetas y proveedores</p>
+            </div>
+            <div class="inicio_usuario">
+                <p>Usuario</p>
+            </div>
+        </section>
+
+        <nav class="pestanas" aria-label="Secciones del inventario">
+            <button class="pestana pestana--activa" data-panel="existencias">Existencias</button>
+            <button class="pestana" data-panel="movimientos">Movimientos</button>
+            <button class="pestana" data-panel="recetas">Recetas y productos</button>
+            <button class="pestana" data-panel="proveedores">Proveedores</button>
+        </nav>
+
+       
+        <section class="panel" id="panel-existencias">
+
+            <div class="kpis">
+                <div class="kpi"><div class="kpi__titulo">Ingredientes</div><div class="kpi__valor" id="kpi-total">0</div></div>
+                <div class="kpi" id="kpi-bajo-caja"><div class="kpi__titulo">Bajo el mínimo</div><div class="kpi__valor" id="kpi-bajo">0</div></div>
+                <div class="kpi"><div class="kpi__titulo">Por caducar</div><div class="kpi__valor" id="kpi-caducar">0</div></div>
+                <div class="kpi kpi--oscuro"><div class="kpi__titulo">Valor del inventario</div><div class="kpi__valor" id="kpi-valor">$0.00</div></div>
+            </div>
+
+            <div class="alertas" id="alertas" hidden></div>
+
+            <div class="herramientas">
+                <input type="search" id="buscar" placeholder="Buscar ingrediente por nombre" aria-label="Buscar ingrediente">
+                <select id="filtro-categoria" aria-label="Filtrar por categoría"><option value="">Todas las categorías</option></select>
+                <span class="separador"></span>
+                <button class="boton boton--principal" id="nuevo-ingrediente">+ Nuevo ingrediente</button>
+            </div>
+
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Ingrediente</th>
+                            <th>Categoría</th>
+                            <th class="numero">Existencia</th>
+                            <th class="numero">Mínimo</th>
+                            <th>Estado</th>
+                            <th>Caducidad</th>
+                            <th>Proveedor</th>
+                            <th class="numero">Costo</th>
+                            <th>Movimientos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-existencias"></tbody>
+                </table>
+            </div>
+        </section>
+
+     
+        <section class="panel" id="panel-movimientos" hidden>
+            <div class="herramientas">
+                <input type="search" id="mov-buscar" placeholder="Buscar ingrediente" aria-label="Buscar ingrediente">
+                <select id="mov-tipo" aria-label="Tipo de movimiento">
+                    <option value="">Todos los movimientos</option>
+                    <option value="entrada">Entradas</option>
+                    <option value="salida">Salidas</option>
+                    <option value="ajuste">Ajustes</option>
+                    <option value="venta">Ventas</option>
+                </select>
+            </div>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Fecha y hora</th>
+                            <th>Ingrediente</th>
+                            <th>Tipo</th>
+                            <th class="numero">Cantidad</th>
+                            <th class="numero">Existencia</th>
+                            <th class="numero">Costo</th>
+                            <th>Proveedor</th>
+                            <th>Motivo</th>
+                            <th>Empleado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-movimientos"></tbody>
+                </table>
+            </div>
+        </section>
+
+
+        <section class="panel" id="panel-recetas" hidden>
+            <div class="recetas">
+
+                <div class="recetas__lista">
+                    <button class="boton boton--principal" id="nuevo-producto">+ Nuevo producto</button>
+                    <div id="lista-productos"></div>
+                </div>
+
+                <div class="recetas__editor" id="editor">
+                    <p class="vacio">Elige un producto para ver o editar su precio y su receta.</p>
+                </div>
+
+            </div>
+        </section>
+
+      
+        <section class="panel" id="panel-proveedores" hidden>
+            <div class="herramientas">
+                <span class="separador"></span>
+                <button class="boton boton--principal" id="nuevo-proveedor">+ Nuevo proveedor</button>
+            </div>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr><th>Proveedor</th><th>Teléfono</th><th>Correo</th><th></th></tr>
+                    </thead>
+                    <tbody id="cuerpo-proveedores"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+    <footer></footer>
+    <script src="components/header.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/inventario.js"></script>
+</body>
+</html>

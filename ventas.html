@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/ventas.css">
+    <link rel="stylesheet" href="components/header.css">
+</head>
+<body>
+
+    <header>
+
+        <mi-header></mi-header>
+
+    </header>
+
+    <main class="contenido">
+
+        <section class="inicio">
+            <div class="inicio_texto">
+                <h1>Ventas</h1>
+                <p class="inicio_subtitulo">Punto de venta</p>
+            </div>
+            <div class="inicio_usuario">
+                <p>Usuario</p>
+            </div>
+        </section>
+
+        <nav class="pestanas" aria-label="Secciones de ventas">
+            <button class="pestana pestana--activa" data-panel="venta">Nueva venta</button>
+            <button class="pestana" data-panel="historial">Historial de ventas</button>
+        </nav>
+
+        <!-- ================= NUEVA VENTA ================= -->
+        <section class="panel" id="panel-venta">
+
+            <ol class="pasos">
+                <li class="paso paso--activo" id="indicador-1"><span>1</span> Agregar productos</li>
+                <li class="paso" id="indicador-2"><span>2</span> Cobrar y finalizar</li>
+            </ol>
+
+            <!-- Paso 1: pedido -->
+            <div class="pos" id="paso-1">
+
+                <div class="catalogo">
+                    <div class="herramientas">
+                        <div class="chips" id="categorias" role="group" aria-label="Categorías">
+                            <button class="chip chip--activo" data-categoria="">Todo</button>
+                            <button class="chip" data-categoria="pizza">Pizzas</button>
+                            <button class="chip" data-categoria="bebida">Bebidas</button>
+                            <button class="chip" data-categoria="complemento">Complementos</button>
+                        </div>
+                        <input type="search" id="buscar-producto" placeholder="Buscar producto" aria-label="Buscar producto">
+                    </div>
+                    <div class="productos" id="productos"></div>
+                </div>
+
+                <aside class="panel-lateral">
+                    <h2>Pedido</h2>
+                    <div id="carrito"></div>
+                    <dl class="totales">
+                        <div><dt>Subtotal</dt><dd id="carrito-subtotal">$0.00</dd></div>
+                    </dl>
+                    <button class="boton boton--principal boton--grande" id="ir-cobro" disabled>Continuar a cobro →</button>
+                    <button class="boton" id="vaciar" disabled>Vaciar pedido</button>
+                </aside>
+
+            </div>
+
+            <!-- Paso 2: cobro -->
+            <div class="pos" id="paso-2" hidden>
+
+                <div class="tarjeta-pos">
+                    <h2>Resumen del pedido</h2>
+                    <div id="cobro-lineas"></div>
+
+                    <h3>Descuentos</h3>
+                    <label class="check" id="bloque-promo" hidden>
+                        <input type="checkbox" id="aplicar-promo" checked>
+                        <span id="promo-texto"></span>
+                    </label>
+                    <div class="descuento-manual">
+                        <label for="desc-valor">Descuento manual</label>
+                        <div>
+                            <select id="desc-tipo" aria-label="Tipo de descuento">
+                                <option value="monto">$ Monto</option>
+                                <option value="porcentaje">% Porcentaje</option>
+                            </select>
+                            <input type="number" id="desc-valor" min="0" step="0.5" placeholder="0">
+                        </div>
+                    </div>
+
+                    <dl class="totales" id="cobro-totales"></dl>
+                </div>
+
+                <aside class="panel-lateral">
+                    <h2>Cobro</h2>
+                    <div class="metodos" role="group" aria-label="Método de pago">
+                        <button class="metodo metodo--activo" data-metodo="efectivo">Efectivo</button>
+                        <button class="metodo" data-metodo="tarjeta">Tarjeta</button>
+                        <button class="metodo" data-metodo="transferencia">Transferencia</button>
+                    </div>
+
+                    <div id="bloque-efectivo">
+                        <label for="recibido">Dinero recibido</label>
+                        <input type="number" id="recibido" min="0" step="0.5" placeholder="0.00">
+                        <div class="rapidos" id="rapidos"></div>
+                    </div>
+
+                    <div class="cambio" id="cambio-caja">
+                        <span id="cambio-etiqueta">Cambio</span>
+                        <strong id="cambio">$0.00</strong>
+                    </div>
+
+                    <button class="boton boton--principal boton--grande" id="finalizar" disabled>Finalizar venta</button>
+                    <button class="boton" id="volver">← Volver al pedido</button>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- ================= HISTORIAL ================= -->
+        <section class="panel" id="panel-historial" hidden>
+
+            <div class="herramientas">
+                <div class="campo">
+                    <label for="hist-desde">Desde</label>
+                    <input type="date" id="hist-desde">
+                </div>
+                <div class="campo">
+                    <label for="hist-hasta">Hasta</label>
+                    <input type="date" id="hist-hasta">
+                </div>
+                <button class="boton" id="hist-buscar">Consultar</button>
+            </div>
+
+            <div class="kpis">
+                <div class="kpi"><div class="kpi__titulo">Ventas en el periodo</div><div class="kpi__valor" id="hist-cantidad">0</div></div>
+                <div class="kpi kpi--oscuro"><div class="kpi__titulo">Total vendido</div><div class="kpi__valor" id="hist-total">$0.00</div></div>
+            </div>
+
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Folio</th>
+                            <th>Fecha y hora</th>
+                            <th>Empleado</th>
+                            <th>Método de pago</th>
+                            <th class="numero">Subtotal</th>
+                            <th class="numero">Descuento</th>
+                            <th class="numero">Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="hist-cuerpo"></tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+    <footer></footer>
+    <script src="components/header.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ventas.js"></script>
+</body>
+</html>

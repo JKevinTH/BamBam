@@ -1,0 +1,74 @@
+/* Pantalla de ventas (punto de venta). Lo común está en app.css */
+
+/* ---------- Pasos ---------- */
+.pasos { display: flex; gap: 14px; list-style: none; margin-bottom: 20px; flex-wrap: wrap; }
+.paso { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--suave); }
+.paso span { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--neutro-fondo); font-size: 13px; }
+.paso--activo { color: var(--texto); }
+.paso--activo span { background: var(--naranja); color: #fff; }
+.paso--hecho span { background: var(--ok-fondo); color: var(--ok-texto); }
+.paso + .paso::before { content: ""; width: 40px; height: 2px; background: var(--borde); margin-right: 4px; align-self: center; }
+
+.pos { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 22px; align-items: start; }
+.pos[hidden] { display: none; }
+
+/* ---------- Catálogo ---------- */
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { padding: 8px 16px; border: 1px solid var(--borde); border-radius: 99px; background: var(--superficie); font-weight: 500; cursor: pointer; }
+.chip:hover { border-color: var(--naranja); }
+.chip--activo { background: var(--oscuro); border-color: var(--oscuro); color: #fff; }
+
+.productos { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; }
+.producto { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 12px; background: var(--superficie); border: 1px solid var(--borde); border-radius: 18px; cursor: pointer; text-align: center; transition: transform .2s, box-shadow .2s, border-color .2s; }
+.producto:hover { transform: translateY(-4px); box-shadow: 0 8px 20px #00000012; border-color: var(--naranja); }
+.producto img { width: 110px; height: 110px; object-fit: contain; }
+.producto strong { font-size: 14px; }
+.producto span { font-weight: 700; color: var(--naranja); }
+.producto small { font-size: 12px; color: var(--suave); }
+
+/* ---------- Panel lateral (pedido / cobro) ---------- */
+.panel-lateral, .tarjeta-pos { background: var(--superficie); border: 1px solid var(--borde); border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.panel-lateral { position: sticky; top: 20px; }
+.panel-lateral h2, .tarjeta-pos h2 { font-size: 18px; }
+.tarjeta-pos h3 { font-size: 15px; margin-top: 6px; }
+.boton--grande { padding: 14px; font-size: 16px; }
+
+.linea { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; padding: 10px 0; border-bottom: 1px solid var(--borde-suave); }
+.linea:last-child { border-bottom: 0; }
+.linea__nombre { font-weight: 600; font-size: 14px; }
+.linea__precio { font-size: 12px; color: var(--suave); }
+.linea__importe { font-weight: 600; text-align: right; }
+.cantidad { display: flex; align-items: center; gap: 8px; }
+.cantidad button { width: 30px; height: 30px; border: 1px solid var(--borde); border-radius: 8px; background: #fff; font-size: 16px; font-weight: 700; cursor: pointer; }
+.cantidad button:hover { background: #fdebdd; }
+.cantidad .quitar { margin-left: 6px; color: var(--peligro-texto); font-size: 13px; width: auto; padding: 0 8px; border-color: transparent; background: none; font-weight: 500; }
+.cantidad span { min-width: 22px; text-align: center; font-weight: 600; }
+
+.totales { display: flex; flex-direction: column; gap: 6px; padding-top: 8px; border-top: 1px solid var(--borde); }
+.totales div { display: flex; justify-content: space-between; font-size: 14px; }
+.totales dd { font-variant-numeric: tabular-nums; }
+.totales .descuento dd { color: var(--ok-texto); }
+.totales .total { font-size: 20px; font-weight: 700; padding-top: 8px; border-top: 1px dashed var(--borde); }
+
+.check { display: flex; gap: 10px; align-items: center; padding: 10px 12px; background: #fff5ec; border: 1px solid #f3bb84; border-radius: 12px; font-size: 13px; cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--naranja); }
+.check[hidden] { display: none; }
+.descuento-manual label { font-size: 13px; font-weight: 600; }
+.descuento-manual div { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
+
+/* ---------- Cobro ---------- */
+.metodos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.metodo { padding: 12px 6px; border: 1.5px solid var(--borde); border-radius: 12px; background: #fff; font-weight: 600; font-size: 13px; cursor: pointer; }
+.metodo--activo { border-color: var(--naranja); background: #fff5ec; color: var(--naranja); }
+#bloque-efectivo { display: flex; flex-direction: column; gap: 8px; }
+#bloque-efectivo label { font-size: 13px; font-weight: 600; }
+#recibido { font-size: 22px; font-weight: 600; padding: 12px; }
+.rapidos { display: flex; gap: 6px; flex-wrap: wrap; }
+.rapidos button { padding: 6px 12px; border: 1px solid var(--borde); border-radius: 99px; background: #fff; font-weight: 500; cursor: pointer; font-size: 13px; }
+.rapidos button:hover { border-color: var(--naranja); }
+.cambio { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: var(--superficie-suave); border-radius: 14px; }
+.cambio strong { font-size: 26px; }
+.cambio--falta strong { color: var(--peligro-texto); }
+.cambio--ok strong { color: var(--ok-texto); }
+
+@media (max-width: 1100px) { .pos { grid-template-columns: 1fr; } .panel-lateral { position: static; } }

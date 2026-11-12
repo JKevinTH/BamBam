@@ -1,0 +1,43 @@
+/* Pantalla de inventario. Lo común está en app.css */
+
+.alertas { 
+    display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px;
+}
+.alertas[hidden] { 
+    display: none;
+}
+.alerta { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #fff5ec; border: 1px solid #f3bb84; border-radius: 14px; font-size: 14px; color: var(--aviso-texto); }
+.alerta--roja { background: #fdecec; border-color: #f1b4b4; color: var(--peligro-texto); }
+.alerta b { font-weight: 600; }
+
+.tabla .nombre { font-weight: 600; }
+.caduca--pronto { color: var(--aviso-texto); font-weight: 600; }
+.caduca--vencido { color: var(--peligro-texto); font-weight: 600; }
+.entrada { color: var(--ok-texto); font-weight: 600; }
+.salida { color: var(--peligro-texto); font-weight: 600; }
+
+/* ---------- Recetas ---------- */
+.recetas { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 22px; align-items: start; }
+.recetas__lista { display: flex; flex-direction: column; gap: 12px; }
+.grupo-titulo { font-size: 12px; font-weight: 600; color: var(--suave); text-transform: uppercase; letter-spacing: .06em; margin: 8px 0 2px; }
+.item-producto { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px; background: var(--superficie); border: 1.5px solid var(--borde); border-radius: 14px; cursor: pointer; text-align: left; margin-bottom: 8px; }
+.item-producto:hover { border-color: var(--naranja); }
+.item-producto--activo { border-color: var(--naranja); background: #fff5ec; }
+.item-producto img { width: 44px; height: 44px; object-fit: contain; }
+.item-producto div { flex: 1; min-width: 0; }
+.item-producto strong { display: block; font-size: 14px; }
+.item-producto span { font-size: 13px; color: var(--naranja); font-weight: 600; }
+.item-producto--inactivo { opacity: .55; }
+
+.recetas__editor { background: var(--superficie); border: 1px solid var(--borde); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+.recetas__editor h2 { font-size: 20px; }
+.recetas__editor h3 { font-size: 15px; }
+.fila-ingrediente { display: grid; grid-template-columns: minmax(0, 1fr) 120px 50px auto; gap: 10px; align-items: center; margin-bottom: 8px; }
+.fila-ingrediente .unidad { font-size: 13px; color: var(--suave); }
+.nota { font-size: 13px; color: var(--suave); }
+
+@media (max-width: 1000px) { .recetas { grid-template-columns: 1fr; } }
+
+/* Botones de la fila en una sola línea */
+.tabla .acciones { flex-wrap: nowrap; }
+.tabla .acciones .boton { white-space: nowrap; }
